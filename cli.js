@@ -59,9 +59,14 @@ if (args.d !== undefined) {
 
     if (days == 0) {
         timeline = "today"
-    } else if (days > 1) {
+    } else if (days > 1 && days <= 6) {
         timeline = "in " + days + " days"
+    } else if (days == 1) {
+        timeline = "tomorrow"
+    } else {
+        throw new Error("Day out of range.")
     }
+    
 }
 
 if ((args.n !== undefined || args.s !== undefined) && (args.e !== undefined || args.w !== undefined)) {
@@ -70,7 +75,17 @@ if ((args.n !== undefined || args.s !== undefined) && (args.e !== undefined || a
         days = args.d;
     }
     
+    let precipitation_hours = data.daily.precipitation_hours[days];
+    var galosh_statement
+    if (precipitation_hours == 0) {
+        galosh_statement = "You will not need your galoshes."
+    }
+    else {
+        galosh_statement = "You might need your galoshes."
+    }
+    
     console.log("In the timezone " + timezone + ", the weather " + timeline + " at latitude: " + latitude + " and longitude: " +
     longitude + " is as follows.\nThe temperature high is " + data.daily.temperature_2m_max[days] + " and low is " + data.daily.temperature_2m_min[days] + " degrees fahrenheit. The max windspeed is " +
-    data.daily.windspeed_10m_max[days] + " mph. There are " + data.daily.precipitation_hours[days] + " hours of rain.\nSunrise is at " + data.daily.sunrise[days].substr(data.daily.sunrise[days].length - 5) + " and sunset is at " + data.daily.sunset[days].substr(data.daily.sunset[days].length - 5) + " given the previously noted timezone.")
+    data.daily.windspeed_10m_max[days] + " mph. There are " + data.daily.precipitation_hours[days] + " hours of rain.\n*****" + galosh_statement + "*****\nSunrise is at " + data.daily.sunrise[days].substr(data.daily.sunrise[days].length - 5)
+    + " and sunset is at " + data.daily.sunset[days].substr(data.daily.sunset[days].length - 5) + " given the previously noted timezone.")
 }
