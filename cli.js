@@ -106,7 +106,6 @@ if ((args.n !== undefined || args.s !== undefined) && (args.e !== undefined || a
     let current_wind_speed = data.current_weather.windspeed;
     let current_wind_direction = data.current_weather.winddirection;
     let current_weathercode = data.current_weather.weathercode;
-
     
     console.log("\nIn the timezone " + timezone + ", the weather " + timeline + " at latitude: " + latitude + " and longitude: " +
     longitude + " is as follows.\n");
