@@ -38,6 +38,11 @@ if (args.w) {
 if (args.t) {
     timezone = args.t;
 }
+
+if (args.z) {
+    timezone = args.z;
+}
+
 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone)
 const data = await response.json();
 
