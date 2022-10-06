@@ -78,14 +78,53 @@ if ((args.n !== undefined || args.s !== undefined) && (args.e !== undefined || a
     let precipitation_hours = data.daily.precipitation_hours[days];
     var galosh_statement
     if (precipitation_hours == 0) {
-        galosh_statement = "You will not need your galoshes."
+        galosh_statement = "You will not need your galoshes"
     }
     else {
-        galosh_statement = "You might need your galoshes."
+        galosh_statement = "You might need your galoshes"
     }
+    let time = data.daily.time[days];
+    let temp_high = data.daily.temperature_2m_max[days];
+    let temp_high_unit = data.daily_units.temperature_2m_max;
+    let temp_low_unit = temp_high_unit;
+    let temp_low = data.daily.temperature_2m_min[days];
+    let precip_sum = data.daily.precipitation_sum[days];
+    let precip_sum_unit = data.daily_units.precipitation_sum;
+    let precip_hours = data.daily.precipitation_hours[days];
+    let precip_hours_unit = data.daily_units.precipitation_hours;
+    let wind_speed = data.daily.windspeed_10m_max[days];
+    let wind_speed_unit = data.daily_units.wind_speed_unit;
+    let wind_direction = data.daily.winddirection_10m_dominant[days];
+    let wind_direction_unit = data.daily_units.winddirection_10m_dominant;
+    let wind_gusts = data.daily.windgusts_10m_max[days];
+    let wind_gusts_unit = data.daily_units.windgusts_10m_max;
+    let weathercode = data.daily.weathercode[days];
+    let sunrise = data.daily.sunrise[days].substr(data.daily.sunrise[days].length - 5);
+    let sunset = data.daily.sunset[days].substr(data.daily.sunset[days].length - 5);
+    let current_time = data.current_weather.time;
+    let current_temp = data.current_weather.temperature;
+    let current_wind_speed = data.current_weather.windspeed;
+    let current_wind_direction = data.current_weather.winddirection;
+    let current_weathercode = data.current_weather.weathercode;
+
     
-    console.log("In the timezone " + timezone + ", the weather " + timeline + " at latitude: " + latitude + " and longitude: " +
-    longitude + " is as follows.\nThe temperature high is " + data.daily.temperature_2m_max[days] + " and low is " + data.daily.temperature_2m_min[days] + " degrees fahrenheit. The max windspeed is " +
-    data.daily.windspeed_10m_max[days] + " mph. There are " + data.daily.precipitation_hours[days] + " hours of rain.\n*****" + galosh_statement + "*****\nSunrise is at " + data.daily.sunrise[days].substr(data.daily.sunrise[days].length - 5)
-    + " and sunset is at " + data.daily.sunset[days].substr(data.daily.sunset[days].length - 5) + " given the previously noted timezone.")
+    console.log("\nIn the timezone " + timezone + ", the weather " + timeline + " at latitude: " + latitude + " and longitude: " +
+    longitude + " is as follows.\n");
+    console.log("Weather for " + time + ": \n");
+    console.log("\n");
+    console.log("Forecast for " + time + ":" + "\n");
+    console.log("\n");
+    console.log("\tHigh: " + temp_high + temp_high_unit + "\tLow: " + temp_low + temp_low_unit + "\n");
+    console.log("\tPrecipitation: " + precip_sum + " " + precip_sum_unit + " over " + precip_hours + " " + precip_hours_unit + "\n");
+    console.log("\tWind: " + wind_speed + " " + wind_speed_unit + " from " + wind_direction + wind_direction_unit + " with gusts up to " + wind_gusts + " " + wind_gusts_unit + " \n");
+    console.log("\tWMO weather code: " + weathercode + "\n");
+    console.log("\tSunrise: " + sunrise+ "\n");
+    console.log("\tSunset: " + sunset + "\n");
+    console.log("\n");
+    console.log("Current weather (" + current_time + "):" + "\n");
+    console.log("\n");
+    console.log("\tTemperature: " + current_temp + temp_high_unit + "\n");
+    console.log("\tWind: " + current_wind_speed + " " + wind_speed_unit + " from " + current_wind_direction + wind_direction_unit + "\n");
+    console.log("\tWMO weather code: " + current_weathercode + "\n\n");
+    console.log(galosh_statement + " " + timeline + ".");
 }
